@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Joke Generator 🤣</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container text-center">
+        <h1 class="mt-4">🤣 Random Joke Generator</h1>
+        
+        <div id="jokeContainer" class="card p-4 mt-4">
+            <p id="jokeText">Click the button to get a joke! 😆</p>
+        </div>
+
+        <button class="btn btn-lg btn-primary mt-3" onclick="getJoke()">Get Joke 😂</button>
+    </div>
+    <script>
+        async function getJoke() {
+    const jokeText = document.getElementById("jokeText");
+
+    try {
+        const response = await fetch("https://official-joke-api.appspot.com/random_joke");
+        const data = await response.json();
+
+        jokeText.innerHTML = `${data.setup} <br><strong>${data.punchline}</strong>`;
+    } catch (error) {
+        jokeText.textContent = "Oops! Couldn't fetch a joke. Try again!";
+    }
+}
+
+    </script>
+</body>
+</html>
